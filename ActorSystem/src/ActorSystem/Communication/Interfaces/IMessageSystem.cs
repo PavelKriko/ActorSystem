@@ -2,5 +2,5 @@ namespace ActorSystem.Communication;
 
 public interface IMessageSystem
 {
-    Task requestMessage(IMessage message);
+    void requestMessage(IMessage message);
 }

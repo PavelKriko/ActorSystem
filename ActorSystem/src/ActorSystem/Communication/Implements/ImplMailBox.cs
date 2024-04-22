@@ -2,13 +2,14 @@ using System.Collections.Concurrent;
 
 namespace ActorSystem.Communication;
 
-public class MailBox(IMessageSystem messageSystem) : IMailBox
+public class MailBox : IMailBox
 {
     ConcurrentQueue<IMessage> _messages = new();
 
-    public async Task SendMessage(IMessage message){
-        await messageSystem.requestMessage(message);
-    }
+   public void PutMessage(IMessage message)
+   {
+        _messages.Enqueue(message);
+   }
 
     public IMessage? GetMessage()
     {

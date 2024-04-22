@@ -2,6 +2,6 @@ namespace ActorSystem.Communication;
 
 public interface IMailBox
 {
-    Task SendMessage(IMessage message);
+    void PutMessage(IMessage message);
     IMessage? GetMessage();
 }
