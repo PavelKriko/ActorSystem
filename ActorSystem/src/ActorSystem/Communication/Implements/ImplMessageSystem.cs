@@ -4,7 +4,7 @@ public class MessageSystem(IRedirectRuleRepository redirectRuleRepository, IDict
 {   
     public async Task requestMessage(IMessage message)
     {
-        var endAddres = redirectRuleRepository.GetAdressReceiver(message.Receiver);
-        await mailBoxes[endAddres].SendMessage(message);
+        var endAddres = redirectRuleRepository.GetAdressReceiver(new SenderReceiverKey(message.Sender, message.Receiver));
+        await endAddres.SendMessage(message);
     }
 }
