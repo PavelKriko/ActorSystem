@@ -16,13 +16,13 @@ public class LocalProcessingMessagesTest
     [Given("Система состоящая их почтовых ящиков")]
     public void Address_For_MailBoxes()
     {   
-        var MailBox1 = new MailBox();
-        var MailBox2 = new MailBox();
+        this.MailBox1 = new MailBox();
+        this.MailBox2 = new MailBox();
         var redirectRules = new Dictionary<SenderReceiverKey, IMailBox>();
         redirectRules[new SenderReceiverKey("Актор№1", "Актор№2")] = MailBox2;
         redirectRules[new SenderReceiverKey("Актор№2", "Актор№1")] = MailBox1;
-        ruleRepo = new RedirectRuleRepository(redirectRules);
-        messageSystem = new MessageSystem(ruleRepo);
+        this.ruleRepo = new RedirectRuleRepository(redirectRules);
+        this.messageSystem = new MessageSystem(ruleRepo);
     }
 
     [When("Из ящика№1 отправляется сообщение в ящик№2")]
@@ -35,6 +35,6 @@ public class LocalProcessingMessagesTest
     }
     [Then("В ящике№2 появляется сообщение")]
     public void Mail2_Contains_messages(){
-        Assert.NotNull(MailBox1.GetMessage());
+        Assert.NotNull(MailBox2!.GetMessage());
     }
 }
