@@ -35,14 +35,14 @@ public sealed class CreateServiceCollectionTest
 
     [When("В нем есть список дескрипторов")]
     public void Given_Description(){
-       Assert.NotEmpty(configuration.GetSection("Dependencies").GetChildren());
+       Assert.NotEmpty(configuration!.GetSection("Dependencies").GetChildren());
     }
 
     [Then("Инициализируется коллекция сервисов")]
     public void Given_Services(){
         System.Console.WriteLine(Type.GetType("A"));
         System.Console.WriteLine(Type.GetType("ImplA"));
-        var services = new ServiceProviderBuilder(configuration).CreateServices();
+        var services = new ServiceProviderBuilder(configuration!).CreateServices();
         var serviceA = services.GetService<A>();
         Assert.NotNull(serviceA);
         Assert.IsAssignableFrom<A>(serviceA);
