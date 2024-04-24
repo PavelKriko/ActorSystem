@@ -5,6 +5,6 @@ public class MessageSystem(IRedirectRuleRepository redirectRuleRepository) : IMe
     public void requestMessage(IMessage message)
     {
         var endAddres = redirectRuleRepository.GetAdressReceiver(new SenderReceiverKey(message.Sender, message.Receiver));
-        endAddres.PutMessage(message);
+        endAddres!.PutMessage(message);
     }
 }
