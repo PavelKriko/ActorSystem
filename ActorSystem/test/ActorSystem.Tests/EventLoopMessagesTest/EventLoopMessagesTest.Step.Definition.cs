@@ -46,12 +46,12 @@ class EventLoopTest
         messageSystem!.requestMessage(msg);
     }
     [Then("В ящике№2 появляется сообщение и EventLoop завершается")]
-    public void Mail2_Contains_messages(){
+    public async void Mail2_Contains_messages(){
         var stop_msg = new Message();
         stop_msg.Context["STOP_EVENT_LOOP"] = true;
         messages!.Add(stop_msg);
         eventLoop!.Wait();
-        Assert.NotNull(MailBox2!.GetMessage());
+        Assert.NotNull(await MailBox2!.GetMessage());
     }
 
 }

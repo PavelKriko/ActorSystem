@@ -1,20 +1,20 @@
 using System.Collections.Concurrent;
+using System.Threading.Tasks.Dataflow;
 
 namespace ActorSystem.Communication;
 
 public class MailBox : IMailBox
 {
-    ConcurrentQueue<IMessage> _messages = new();
+    BufferBlock<IMessage> _messages = new();
 
    public void PutMessage(IMessage message)
    {
-        _messages.Enqueue(message);
+        _messages.Post(message);
    }
 
-    public IMessage? GetMessage()
-    {
-        IMessage? message;
-        return _messages.TryDequeue(out message)? message : null;
+    public Task<IMessage> GetMessage()
+    {   
+        return _messages.ReceiveAsync();
     }
 
 }

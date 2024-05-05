@@ -34,7 +34,7 @@ public class LocalProcessingMessagesTest
         messageSystem!.requestMessage(msg);
     }
     [Then("В ящике№2 появляется сообщение")]
-    public void Mail2_Contains_messages(){
-        Assert.NotNull(MailBox2!.GetMessage());
+    public async void Mail2_Contains_messages(){
+        Assert.NotNull(await MailBox2!.GetMessage());
     }
 }
